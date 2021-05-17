@@ -154,9 +154,8 @@ form {
   width: 50%;
 }
 
-.btn {
+#btn {
   display: block;
-  width: 20%;
   padding: 0.75rem;
   background-color: teal;
   color: inherit;

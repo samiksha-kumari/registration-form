@@ -78,7 +78,7 @@ class RegisterForm extends React.Component {
             age_now-- ;
         }
         console.log(age_now);
-        return age_now
+        return age_now;
     }
 
   getDetails = () => {
@@ -105,7 +105,7 @@ class RegisterForm extends React.Component {
        <form autoComplete="off" id="survey-form" onSubmit = {this.handleSubmit} >
         <div class="form-group">
             <label id="name-label" for="name">First Name*</label>
-            <input type="text" class="form-control" id="firstname" placeholder=" Enter Your firstName"  name = "firstname" value ={this.state.firstname} 
+            <input type="text" class="form-control" id="firstname" placeholder=" Enter Your First Name"  name = "firstname" value ={this.state.firstname} 
             onChange = {this.handleChange}
             autoComplete="new-password"
             required />
@@ -186,7 +186,7 @@ class RegisterForm extends React.Component {
             onChange={this.handleChange}
             autoComplete="new-password"
             required
-            /> <input type="button" class="btn" value ="Get Details" onClick={this.getDetails}/>
+            /> <input type="button" id="btn"  value ="Get Details" onClick={this.getDetails}/>
         </div>
         <div class="form-group">
             <label id="state-label" for="state">State</label>
