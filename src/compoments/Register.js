@@ -47,11 +47,16 @@ class RegisterForm extends React.Component {
     handleChange = (e) => {
         this.setState({
             [e.target.name] : e.target.value
+        },()=>{
+            if(e.target.name==='pincode' && e.target.value && e.target.value.length === 6)this.getDetails()
+            else if(this.state)this.setState({state:'',district:''})
         })
+       
+        // debugger
 
     }
 
-    handleChange_age = (e) => {
+    handleChange_dob = (e) => {
         console.log("DOB:", e.target.value);
     
         this.setState({ dob: e.target.value }, () => {
@@ -60,13 +65,14 @@ class RegisterForm extends React.Component {
             // this will have the latest this.state.dob
         })
        // call calculate_age with event.target.value
-        let age_latest = {age_latest: this.calculateAge(e.target.value)}
+        let age_latest = this.calculateAge(e.target.value)
         // console.log(age_latest);
         this.setState({ age: age_latest }, () => {
             console.log("Age:", this.state.age);
             // show latest this.state.age1
         })
       }
+
 
     calculateAge = (dob) => {
         let today = new Date()
@@ -81,19 +87,24 @@ class RegisterForm extends React.Component {
         return age_now;
     }
 
+
+
   getDetails = () => {
+    if(this.state.pincode === "") {
+        alert("pincode required")
+    }else{
       fetch(`https://api.postalpincode.in/pincode/${this.state.pincode}`)
       .then(response => response.json())
       .then(data => {
-          if(this.state.pincode === "") {
-              alert("pincode required")
-          }else {
-               this.setState([{district: data[0].PostOffice[0].District, state:  data[0].PostOffice[0].State }])
+        if(data && data.length && data[0].PostOffice && data[0].PostOffice.length){
+            debugger
+               this.setState({district: data[0].PostOffice[0].District, state:  data[0].PostOffice[0].State })
+            //    console.log([{district: data[0].PostOffice[0].District, state: data[0].PostOffice[0].State}])
         }
-    }
-    // console.log([{district: data[0].PostOffice[0].District, state:  data[0].PostOffice[0].State}])
-   );
         
+    }
+    );
+}   
     }
     
     
@@ -104,7 +115,7 @@ class RegisterForm extends React.Component {
            <h2 id="title" class="text-center">Registration Form</h2>
        <form autoComplete="off" id="survey-form" onSubmit = {this.handleSubmit} >
         <div class="form-group">
-            <label id="name-label" for="name">First Name*</label>
+            <label id="name-label" for="name">First Name <span style={{color:'red'}}>*</span></label>
             <input type="text" class="form-control" id="firstname" placeholder=" Enter Your First Name"  name = "firstname" value ={this.state.firstname} 
             onChange = {this.handleChange}
             autoComplete="new-password"
@@ -143,8 +154,8 @@ class RegisterForm extends React.Component {
         </div>
 
         <div class="form-group">
-            <label id="birth-label" for="birth" required>D.O.B </label>
-            <input type="date" name="dob" id ="dob" value={this.state.dob}  onChange={this.handleChange_age}
+            <label id="birth-label" for="birth" required>D.O.B* </label>
+            <input type="date" name="dob" id ="dob" value={this.state.dob}  onChange={this.handleChange_dob}
             
         class="form-control"/>
         </div>
@@ -186,7 +197,7 @@ class RegisterForm extends React.Component {
             onChange={this.handleChange}
             autoComplete="new-password"
             required
-            /> <input type="button" id="btn"  value ="Get Details" onClick={this.getDetails}/>
+            />
         </div>
         <div class="form-group">
             <label id="state-label" for="state">State</label>
