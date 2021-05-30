@@ -122,7 +122,7 @@ class RegisterForm extends React.Component {
             required />
         </div>
        <div class="form-group">
-            <label id="name-label" for="name">Last Name*</label>
+            <label id="name-label" for="name">Last Name<span style={{color:'red'}}>*</span></label>
             <input type="text" class="form-control" id="lastname" placeholder=" Enter Your Last Name" name="lastname" value = {this.state.lastname} 
             onChange = {this.handleChange}
             autoComplete="new-password"
@@ -154,7 +154,7 @@ class RegisterForm extends React.Component {
         </div>
 
         <div class="form-group">
-            <label id="birth-label" for="birth" required>D.O.B* </label>
+            <label id="birth-label" for="birth" required>D.O.B<span style={{color:'red'}}>*</span> </label>
             <input type="date" name="dob" id ="dob" value={this.state.dob}  onChange={this.handleChange_dob}
             
         class="form-control"/>
@@ -177,7 +177,7 @@ class RegisterForm extends React.Component {
             required/>
         </div>
         <div class="form-group">
-            <label id="address1-label" for="address1">Address Line1*</label>
+            <label id="address1-label" for="address1">Address Line1<span style={{color:'red'}}>*</span></label>
             <input type="text" class="form-control" id="address1" placeholder=" Enter Your address" name="address1" value ={this.state.address1}
             onChange={this.handleChange}
             autoComplete="new-password"
@@ -192,7 +192,7 @@ class RegisterForm extends React.Component {
         </div>
 
         <div class="form-group">
-            <label id="pincode-label" for="pincode">Pincode* </label>
+            <label id="pincode-label" for="pincode">Pincode<span style={{color:'red'}}>*</span> </label>
             <input type="number" class="form-control" id="pincode" name="pincode" placeholder="pincode" value={this.state.pincode}
             onChange={this.handleChange}
             autoComplete="new-password"
@@ -206,7 +206,7 @@ class RegisterForm extends React.Component {
             onChange={this.handleChange}
             autoComplete="new-password"
             
-            // disabled
+            disabled
             required />
         </div>
 
@@ -217,7 +217,7 @@ class RegisterForm extends React.Component {
             onChange={this.handleChange}
             autoComplete="new-password"
 
-            // disabled
+            disabled
             required />
         </div>
         <div class="form-group">
